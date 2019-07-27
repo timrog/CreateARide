@@ -29,22 +29,12 @@ function resourcesCanBeFound()
   moveToTargetFolder(ss)
   DriveApp.removeFile(DriveApp.getFileById(ss.getId()))
     
+  if (!DriveApp.getFolderById(targetFolder))
+     Logger.log("ERROR: Target Drive folder does not exist");
+  
   Logger.log("OK");
 }
 
 function testProperties() {
   console.info(PropertiesService.getDocumentProperties().getProperties())
-}
-
-function refreshResponse() {
-  const id = "2_ABaOnudp5Gs7pJQZ34O_h9aU-_zJlVoM0-dEIP_JEBw9Fmwzh8XDdkBhf4V28W5DorbUTRM"
-
-  const resp = FormApp.getActiveForm().getResponse(id)
-  const model = mapResponse(resp)
-  createOrUpdateCalendarEvent(model)
-}
-
-function test2()
-{
-  
 }

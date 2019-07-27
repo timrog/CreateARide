@@ -1,9 +1,18 @@
 {
   "timeZone": "Europe/London",
   "dependencies": {
+    "enabledAdvancedServices": [{
+      "userSymbol": "Drive",
+      "serviceId": "drive",
+      "version": "v2"
+    }, {
+      "userSymbol": "Calendar",
+      "serviceId": "calendar",
+      "version": "v3"
+    }]
   },
   "webapp": {
-    "access": "ANYONE",
+    "access": "MYSELF",
     "executeAs": "USER_DEPLOYING"
   },
   "exceptionLogging": "STACKDRIVER",
