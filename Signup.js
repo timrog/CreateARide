@@ -22,7 +22,9 @@ function createResponsesSheet(model, form)
   form.setDestination(FormApp.DestinationType.SPREADSHEET, file.getId())
   
   model.responsesUrl = file.getUrl()
-    
+ 
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW)
+ 
   return file
 }
 
@@ -43,8 +45,6 @@ function updateResponsesSheet(model)
   
   const projection = ss.getSheetByName("All responses")
   projection.getRange(1,1).setFormula(`{'${responseSheet.getName()}'!1:1000}`)
-  
-  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW)
   
   return ss
 }
