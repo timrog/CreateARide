@@ -21,8 +21,15 @@ function createResponsesSheet(model, form)
   
   form.setDestination(FormApp.DestinationType.SPREADSHEET, file.getId())
   
-  const ss = SpreadsheetApp.openById(file.getId())
-  const static = ss.getSheetByName("Static") 
+  model.responsesUrl = file.getUrl()
+    
+  return file
+}
+
+function updateResponsesSheet(model) 
+{
+  const ss = SpreadsheetApp.openByUrl(model.responsesUrl)
+  const static = ss.getSheetByName("Static")
   let i = 1
   for(let k in model) { 
     static.getRange(i, 1).setValue(k)
@@ -39,7 +46,6 @@ function createResponsesSheet(model, form)
   
   file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW)
   
-  model.responsesUrl = file.getUrl()
   return ss
 }
 

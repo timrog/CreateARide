@@ -45,6 +45,16 @@ function createOrUpdateCalendarEvent(model)
   
   console.log("Updating calendar event", eventId);
   updateCalendarEvent(event, model);
+  
+  if(model.isExpired) {
+    console.log("Removing signup and responses sheet for", model.title)
+    removeSignupForm(model.formId)
+    //removeResponsesSheet(model.responsesUrl)
+  }
+  else {
+    console.log("Updating responses sheet");
+    updateResponsesSheet(model);
+  }
 }
 
 function updateCalendarEvent(event, model)
@@ -58,12 +68,6 @@ function updateCalendarEvent(event, model)
   
   model.isExpired = eventHasExpired(event)
   event.setDescription(calendarDescription(model));
-  
-  if(model.isExpired) {
-    console.log("Removing signup and responses sheet for", model.title)
-    removeSignupForm(model.formId)
-    //removeResponsesSheet(model.responsesUrl)
-  }
   
   PropertiesService.getDocumentProperties().setProperty(model.id + "_event", event.getId());
 }
